@@ -1,18 +1,30 @@
-
 import 'package:flutter/material.dart';
+import 'dart:js' as js;
 
 class WebFont {
   static TextStyle bold({required double size, Color? color}) {
-    return TextStyle(fontSize: size, color: color, fontFamily: 'SF', fontWeight: FontWeight.w800);
+    return TextStyle(
+        fontSize: size,
+        color: color,
+        fontFamily: 'SF',
+        fontWeight: FontWeight.w800);
   }
+
   static TextStyle medium({required double size, Color? color}) {
-    return TextStyle(fontSize: size, color: color, fontFamily: 'SF', fontWeight: FontWeight.w500);
+    return TextStyle(
+        fontSize: size,
+        color: color,
+        fontFamily: 'SF',
+        fontWeight: FontWeight.w500);
   }
-  static TextStyle regular({required double size, Color? color, double? height}) {
-    return TextStyle(fontSize: size, color: color, fontFamily: 'SF', height: height);
+
+  static TextStyle regular(
+      {required double size, Color? color, double? height}) {
+    return TextStyle(
+        fontSize: size, color: color, fontFamily: 'SF', height: height);
   }
 }
-  
+
 class WebColors {
   static Color text = Colors.white;
   static Color textLight = const Color(0xffE0E0E0);
@@ -24,3 +36,7 @@ class WebColors {
 double widthRatio = 1;
 double heightRatio = 1;
 bool isWebMobile = false;
+
+launch(String url) {
+  js.context.callMethod('open', [url]);
+}

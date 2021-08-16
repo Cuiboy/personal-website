@@ -41,7 +41,7 @@ class Experience {
 
   static Experience bm = Experience(
       tag: "Experience",
-      pos: "Associate Product Manager",
+      pos: "Associate Product Manager\n",
       employer: "Berkeley Mobile",
       start: "09.2020",
       desc:
@@ -71,4 +71,41 @@ class Experience {
   }
 }
 
-class Project {}
+class Project {
+  String name;
+  String desc;
+  String imgPath;
+  bool available;
+  String? url;
+
+  Project(
+      {required this.name,
+      required this.desc,
+      required this.imgPath,
+      required this.available,
+      this.url});
+
+  static Project integral = Project(
+      name: "Integral",
+      desc:
+          "One-stop solution to campus information management platform for administrators. Digital backpack for students.",
+      imgPath: "assets/images/integral-icon.png",
+      url: "https://apps.apple.com/us/app/integral-digital-backpack/id1480096639",
+      available: true);
+  
+  static Project broomstick = Project(
+      name: "Broomstick",
+      desc:
+          "Automatically detect and clean up bad photos in your camera roll so you always have space to take more.",
+      imgPath: "assets/images/broomstick-icon.png",
+      available: false);
+  
+  static Project packmat = Project(
+      name: "Integral",
+      desc:
+          "A weight-sensitive solution to package theft. MIT LaunchX start-up, class of summer 2019.",
+      imgPath: "assets/images/packmat-icon.png",
+      url: "https://launchx.com/blog/packmat-an-aesthetic-solution-to-package-theft/",
+      available: true);
+
+}
