@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 
 class WebFont {
-  static TextStyle bold(double size, Color color) {
+  static TextStyle bold({required double size, Color? color}) {
     return TextStyle(fontSize: size, color: color, fontFamily: 'SF', fontWeight: FontWeight.w800);
   }
-  static TextStyle medium(double size, Color color) {
+  static TextStyle medium({required double size, Color? color}) {
     return TextStyle(fontSize: size, color: color, fontFamily: 'SF', fontWeight: FontWeight.w500);
   }
-  static TextStyle regular(double size, Color color) {
+  static TextStyle regular({required double size, Color? color}) {
     return TextStyle(fontSize: size, color: color, fontFamily: 'SF');
   }
 }
@@ -20,3 +20,7 @@ class WebColors {
   static Color background = Colors.black;
   static Color cards = const Color(0xff1d2838);
 }
+
+double widthRatio = 1;
+double heightRatio = 1;
+bool isWebMobile = false;
