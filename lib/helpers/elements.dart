@@ -8,7 +8,7 @@ class WebCard extends StatelessWidget {
   double? width;
   double? height;
   Widget? child;
-  WebCard({Key? key, double? width, double? height, Widget? child})
+  WebCard({Key? key, this.width, this.height, this.child})
       : super(key: key);
 
   @override
@@ -65,16 +65,17 @@ class WebButton extends StatefulWidget {
   final String text;
   final double width;
   final double height;
+  final double textSize;
   final Function? onPressed;
 
-  const WebButton(
-      {Key? key,
-      this.text = "",
-      this.width = 150,
-      this.height = 50,
-      this.onPressed,
-      })
-      : super(key: key);
+  const WebButton({
+    Key? key,
+    this.text = "",
+    this.width = 150,
+    this.height = 50,
+    this.textSize = 16,
+    this.onPressed,
+  }) : super(key: key);
 
   @override
   _WebButtonState createState() => _WebButtonState();
@@ -96,19 +97,32 @@ class _WebButtonState extends State<WebButton> {
           buttonTapDown = false;
         });
       },
-      onTap: () => widget.onPressed,
+      onTap: () {
+        if (widget.onPressed != null) {
+          setState(() {
+            buttonTapDown = true;
+          });
+          widget.onPressed!();
+          Future.delayed(const Duration(milliseconds: 300)).then((_) {
+            setState(() {
+              buttonTapDown = false;
+            });
+          });
+        }
+      },
       child: AnimatedContainer(
         width: widget.width,
         height: widget.height,
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 100),
         decoration: BoxDecoration(
             color: (buttonTapDown) ? WebColors.highlight : Colors.transparent,
             border: Border.all(width: 1, color: WebColors.highlight),
-            borderRadius: BorderRadius.all(Radius.circular(widget.width * 0.5))),
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.width * 0.5))),
         child: Center(
             child: Text(widget.text,
                 style: WebFont.regular(
-                    size: 16,
+                    size: widget.textSize,
                     color: (buttonTapDown)
                         ? WebColors.text
                         : WebColors.highlight))),

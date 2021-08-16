@@ -8,8 +8,8 @@ class WebFont {
   static TextStyle medium({required double size, Color? color}) {
     return TextStyle(fontSize: size, color: color, fontFamily: 'SF', fontWeight: FontWeight.w500);
   }
-  static TextStyle regular({required double size, Color? color}) {
-    return TextStyle(fontSize: size, color: color, fontFamily: 'SF');
+  static TextStyle regular({required double size, Color? color, double? height}) {
+    return TextStyle(fontSize: size, color: color, fontFamily: 'SF', height: height);
   }
 }
   
