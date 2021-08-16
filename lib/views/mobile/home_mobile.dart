@@ -5,7 +5,7 @@ import 'package:personal_website/helpers/elements.dart';
 import 'package:personal_website/helpers/objects.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
-
+import 'dart:math' as math;
 import 'package:personal_website/helpers/web_icons.dart';
 
 class HomeMobile extends StatefulWidget {
@@ -31,9 +31,12 @@ class _HomeMobileState extends State<HomeMobile>
   scrollTo(double height, {double? heightPercent}) {
     double finalHeight = height;
     double finalHeightPercent = heightPercent ?? 0.6;
-    if (height > 300) {
+    if (height > 300 && heightRatio < widthRatio) {
       finalHeight = finalHeightPercent * height * heightRatio +
           (1.0 - finalHeightPercent) * height * widthRatio;
+    } else {
+      finalHeightPercent = 1.0;
+       finalHeight = height * math.pow(heightRatio, 0.5);
     }
     innerScrollController.animateTo(finalHeight,
         duration: Duration(milliseconds: (250 + (height / 100).round())),
@@ -696,7 +699,7 @@ class _HomeMobileState extends State<HomeMobile>
                 setState(() {
                   heightDelta = innerScrollController.position.pixels;
                 });
-                if (innerScrollController.position.pixels != 0) {
+                if (innerScrollController.position.pixels > 100) {
                   if (showBackToTop == false) {
                     setState(() {
                       showBackToTop = true;
@@ -710,27 +713,30 @@ class _HomeMobileState extends State<HomeMobile>
                   }
                 }
               });
-              return Padding(
-                padding: EdgeInsets.only(
-                    left: 20.0 * widthRatio, right: 20 * widthRatio),
-                child: ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      switch (index) {
-                        case 0:
-                          return buildHeader();
-                        case 1:
-                          return buildExp();
-                        case 2:
-                          return buildProj();
-                        case 3:
-                          return buildHobbies();
-                        case 4:
-                          return buildFooter();
-                        default:
-                          return Container();
-                      }
-                    }),
+              return Scrollbar(
+                controller: innerScrollController,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: 20.0 * widthRatio, right: 20 * widthRatio),
+                  child: ListView.builder(
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        switch (index) {
+                          case 0:
+                            return buildHeader();
+                          case 1:
+                            return buildExp();
+                          case 2:
+                            return buildProj();
+                          case 3:
+                            return buildHobbies();
+                          case 4:
+                            return buildFooter();
+                          default:
+                            return Container();
+                        }
+                      }),
+                ),
               );
             }),
           ),
@@ -814,7 +820,7 @@ class _HomeMobileState extends State<HomeMobile>
                             collapseMenu();
                             Future.delayed(const Duration(milliseconds: 500))
                                 .then((_) {
-                              scrollTo(2800, heightPercent: 0.1);
+                              scrollTo(2800, heightPercent: 0.4);
                             });
                           },
                           child: Text(
@@ -831,7 +837,7 @@ class _HomeMobileState extends State<HomeMobile>
                             collapseMenu();
                             Future.delayed(const Duration(milliseconds: 400))
                                 .then((_) {
-                              scrollTo(4350, heightPercent: 0.05);
+                              scrollTo(4350, heightPercent: 0.3);
                             });
                           },
                           child: Text(
