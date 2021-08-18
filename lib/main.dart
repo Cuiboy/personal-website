@@ -16,34 +16,36 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Patrick Cui',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        fontFamily: "SF"
-      ),
+      theme: ThemeData(brightness: Brightness.dark, fontFamily: "SF"),
       home: const MainNavigation(),
     );
   }
 }
 
 class MainNavigation extends StatefulWidget {
-  const MainNavigation({ Key? key }) : super(key: key);
+  const MainNavigation({Key? key}) : super(key: key);
 
   @override
   _MainNavigationState createState() => _MainNavigationState();
 }
 
 class _MainNavigationState extends State<MainNavigation> {
-
-  @override 
+  @override
   void initState() {
     super.initState();
     isWebMobile = kIsWeb &&
-      (defaultTargetPlatform == TargetPlatform.iOS ||
-          defaultTargetPlatform == TargetPlatform.android);
+        (defaultTargetPlatform == TargetPlatform.iOS ||
+            defaultTargetPlatform == TargetPlatform.android);
   }
 
   @override
   Widget build(BuildContext context) {
-    return (isWebMobile || MediaQuery.of(context).size.width < 720) ? const HomeMobile() : const HomeDesktop();
+    bool isVertical = MediaQuery.of(context).size.width /
+            MediaQuery.of(context).size.height <=
+        0.75;
+    bool isNarrow = MediaQuery.of(context).size.width < 720;
+    return (isWebMobile || isVertical || isNarrow)
+        ? const HomeMobile()
+        : const HomeDesktop();
   }
 }

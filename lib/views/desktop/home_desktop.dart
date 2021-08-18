@@ -78,7 +78,10 @@ class _HomeDesktopState extends State<HomeDesktop> {
               width: 20 * widthRatio,
             ),
             WebButton(
+              width: 150 * widthRatio,
+              height: 50 * widthRatio,
               text: "Resume",
+              textSize: 22 * widthRatio,
               onPressed: () => launch(resumeLink),
             ),
             SizedBox(
@@ -104,7 +107,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
         FadeIn(
             200,
             true,
-            Text("Patrick Cui.",
+            Text("Patrick Cui." + MediaQuery.of(context).size.height.toString(),
                 style: WebFont.semibold(size: 80 * widthRatio))),
         FadeIn(
           350,
