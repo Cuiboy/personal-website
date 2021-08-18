@@ -107,7 +107,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
         FadeIn(
             200,
             true,
-            Text("Patrick Cui." + MediaQuery.of(context).size.height.toString(),
+            Text("Patrick Cui.",
                 style: WebFont.semibold(size: 80 * widthRatio))),
         FadeIn(
           350,
@@ -309,10 +309,10 @@ class _HomeDesktopState extends State<HomeDesktop> {
         width: 470 * widthRatio,
         height: 670 * widthRatio,
         child: Padding(
-          padding: EdgeInsets.all(30.0 * widthRatio),
+          padding: EdgeInsets.all(25.0 * widthRatio),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: 20 * widthRatio),
               Text(
                 "Featured Proejdct",
                 style: WebFont.regular(
@@ -355,9 +355,10 @@ class _HomeDesktopState extends State<HomeDesktop> {
                   ),
                 ),
               ),
-              SizedBox(height: 50 * widthRatio),
+              SizedBox(height: 40 * widthRatio),
               (proj.available)
                   ? IconButton(
+                      padding: EdgeInsets.all(8 * widthRatio),
                       icon: Icon(
                         Icons.open_in_new,
                         color: WebColors.highlight,
