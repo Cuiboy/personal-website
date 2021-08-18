@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:personal_website/helpers/global.dart';
@@ -30,6 +31,8 @@ class MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<MainNavigation> {
+  final Future<FirebaseApp> initApp = Firebase.initializeApp();
+
   @override
   void initState() {
     super.initState();
@@ -44,8 +47,27 @@ class _MainNavigationState extends State<MainNavigation> {
             MediaQuery.of(context).size.height <=
         0.75;
     bool isNarrow = MediaQuery.of(context).size.width < 720;
-    return (isWebMobile || isVertical || isNarrow)
-        ? const HomeMobile()
-        : const HomeDesktop();
+    return FutureBuilder(
+        future: initApp,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Scaffold(
+              body: Center(
+                  child: Text(
+                "An Error Occured",
+                style: WebFont.semibold(size: 20, color: WebColors.text),
+              )),
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.done) {
+            return (isWebMobile || isVertical || isNarrow)
+                ? const HomeMobile()
+                : const HomeDesktop();
+          }
+          return Scaffold(
+              body: Center(
+                  child: CircularProgressIndicator(color: WebColors.highlight,)),
+            );
+        });
   }
 }

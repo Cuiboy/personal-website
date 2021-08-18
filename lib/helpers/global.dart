@@ -51,4 +51,4 @@ launch(String url) {
   js.context.callMethod('open', [url]);
 }
 
-final String resumeLink = "https://drive.google.com/file/d/1L40zBZc5E-IyETSuzS810Co9k0wyUbyn/view?usp=sharing";
+const String resumeLink = "https://drive.google.com/file/d/1L40zBZc5E-IyETSuzS810Co9k0wyUbyn/view?usp=sharing";
