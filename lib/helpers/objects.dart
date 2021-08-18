@@ -115,7 +115,7 @@ class Project {
       available: false);
   
   static Project packmat = Project(
-      name: "Integral",
+      name: "Packmat",
       desc:
           "A weight-sensitive solution to package theft. MIT LaunchX start-up, class of summer 2019.",
       imgPath: "assets/images/packmat-icon.png",
