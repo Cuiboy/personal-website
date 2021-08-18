@@ -47,7 +47,7 @@ double widthRatio = 1;
 double heightRatio = 1;
 bool isWebMobile = false;
 
-launch(String url) {
+webLaunch(String url) {
   js.context.callMethod('open', [url]);
 }
 

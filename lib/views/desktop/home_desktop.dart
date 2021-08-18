@@ -82,7 +82,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
               height: 50 * widthRatio,
               text: "Resume",
               textSize: 22 * widthRatio,
-              onPressed: () => launch(resumeLink),
+              onPressed: () => webLaunch(resumeLink),
             ),
             SizedBox(
               width: 80 * widthRatio,
@@ -257,7 +257,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                     ),
                     iconSize: 36 * widthRatio,
                     onPressed: () {
-                      launch(exp.url);
+                      webLaunch(exp.url);
                     }),
               ))
         ],
@@ -365,7 +365,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                       ),
                       iconSize: 36 * widthRatio,
                       onPressed: () {
-                        launch(proj.url!);
+                        webLaunch(proj.url!);
                       },
                     )
                   : Container(
@@ -467,7 +467,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                         color: WebColors.text,
                       ),
                       onPressed: () {
-                        launch("https://www.instagram.com/patrick.drone/");
+                        webLaunch("https://www.instagram.com/patrick.drone/");
                       }),
                 ))
           ],
@@ -587,7 +587,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                                 size: 24 * widthRatio, color: WebColors.text)
                             .apply(decoration: TextDecoration.underline),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => launch(
+                          ..onTap = () => webLaunch(
                               "https://en.wikipedia.org/wiki/Claude_Debussy")),
                     TextSpan(
                       text: " & ",
@@ -600,7 +600,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                                 size: 24 * widthRatio, color: WebColors.text)
                             .apply(decoration: TextDecoration.underline),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => launch(
+                          ..onTap = () => webLaunch(
                               "https://en.wikipedia.org/wiki/Franz_Liszt")),
                     TextSpan(
                       text: ".",
@@ -677,7 +677,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
           text: "Say Hello",
           textSize: 24 * widthRatio,
           onPressed: () {
-            launch('mailto:work@cuipatrick.com');
+            webLaunch('mailto:work@cuipatrick.com');
           },
         ),
         SizedBox(height: 250 * widthRatio),
@@ -800,31 +800,31 @@ class _HomeDesktopState extends State<HomeDesktop> {
                     IconButton(
                       icon: Icon(WebIcons.github, color: WebColors.highlight),
                       onPressed: () {
-                        launch("https://github.com/Cuiboy");
+                        webLaunch("https://github.com/Cuiboy");
                       },
                     ),
                     SizedBox(height: 8 * widthRatio),
                     IconButton(
                       icon: Icon(WebIcons.facebook, color: WebColors.highlight),
                       onPressed: () =>
-                          launch("https://www.facebook.com/patrickk.cui"),
+                          webLaunch("https://www.facebook.com/patrickk.cui"),
                     ),
                     SizedBox(height: 8 * widthRatio),
                     IconButton(
                       icon: Icon(WebIcons.instagram, color: WebColors.highlight),
                       onPressed: () =>
-                          launch("https://www.instagram.com/patrickk.cui/"),
+                          webLaunch("https://www.instagram.com/patrickk.cui/"),
                     ),
                     SizedBox(height: 8 * widthRatio),
                     IconButton(
                       icon: Icon(WebIcons.linkedin, color: WebColors.highlight),
                       onPressed: () =>
-                          launch("https://www.linkedin.com/in/cuipatrick/"),
+                          webLaunch("https://www.linkedin.com/in/cuipatrick/"),
                     ),
                     SizedBox(height: 8 * widthRatio),
                     IconButton(
                       icon: Icon(Icons.description, color: WebColors.highlight),
-                      onPressed: () => launch(resumeLink),
+                      onPressed: () => webLaunch(resumeLink),
                     ),
                     SizedBox(height: 16 * widthRatio),
                     Container(

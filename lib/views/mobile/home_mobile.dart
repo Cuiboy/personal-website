@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:platform_detect/platform_detect.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 import 'dart:math' as math;
+import 'package:url_launcher/url_launcher.dart';
 import 'package:personal_website/helpers/web_icons.dart';
 import 'package:personal_website/helpers/global.dart';
 import 'package:personal_website/helpers/elements.dart';
@@ -173,7 +173,8 @@ class _HomeMobileState extends State<HomeMobile>
           WebButton(
               text: "Explore",
               onPressed: () {
-                scrollTo(600);
+                launch('https://patrickcui.com', forceSafariVC: false);
+                //scrollTo(600);
               }),
         ),
         SizedBox(
@@ -627,24 +628,24 @@ class _HomeMobileState extends State<HomeMobile>
             IconButton(
               icon: Icon(WebIcons.github, color: WebColors.highlight),
               onPressed: () {
-                launch("https://github.com/Cuiboy");
+                webLaunch("https://github.com/Cuiboy");
               },
             ),
             IconButton(
               icon: Icon(WebIcons.facebook, color: WebColors.highlight),
-              onPressed: () => launch("https://www.facebook.com/patrickk.cui"),
+              onPressed: () => webLaunch("https://www.facebook.com/patrickk.cui"),
             ),
             IconButton(
               icon: Icon(WebIcons.instagram, color: WebColors.highlight),
-              onPressed: () => launch("https://www.instagram.com/patrickk.cui/"),
+              onPressed: () => webLaunch("https://www.instagram.com/patrickk.cui/"),
             ),
             IconButton(
               icon: Icon(WebIcons.linkedin, color: WebColors.highlight),
-              onPressed: () => launch("https://www.linkedin.com/in/cuipatrick/"),
+              onPressed: () => webLaunch("https://www.linkedin.com/in/cuipatrick/"),
             ),
             IconButton(
               icon: Icon(Icons.description, color: WebColors.highlight),
-              onPressed: () => launch(resumeLink),
+              onPressed: () => webLaunch(resumeLink),
             ),
           ],
         ),
@@ -741,7 +742,6 @@ class _HomeMobileState extends State<HomeMobile>
               );
             }),
           ),
-          Align(alignment: Alignment.bottomLeft, child: Text(browser.name),),
           Align(
             alignment: Alignment.bottomRight,
             child: Padding(
@@ -856,7 +856,7 @@ class _HomeMobileState extends State<HomeMobile>
                             text: "Resume",
                             width: 155 * widthRatio,
                             height: 54 * widthRatio,
-                            onPressed: () => launch("https://drive.google.com/file/d/1L40zBZc5E-IyETSuzS810Co9k0wyUbyn/view?usp=sharing")))
+                            onPressed: () => webLaunch("https://drive.google.com/file/d/1L40zBZc5E-IyETSuzS810Co9k0wyUbyn/view?usp=sharing")))
                   ],
                 ),
               ),
