@@ -1,12 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_website/helpers/global.dart';
-import 'package:personal_website/helpers/elements.dart';
-import 'package:personal_website/helpers/objects.dart';
+import 'package:platform_detect/platform_detect.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 import 'dart:math' as math;
 import 'package:personal_website/helpers/web_icons.dart';
+import 'package:personal_website/helpers/global.dart';
+import 'package:personal_website/helpers/elements.dart';
+import 'package:personal_website/helpers/objects.dart';
 
 class HomeMobile extends StatefulWidget {
   const HomeMobile({Key? key}) : super(key: key);
@@ -740,6 +741,7 @@ class _HomeMobileState extends State<HomeMobile>
               );
             }),
           ),
+          Align(alignment: Alignment.bottomLeft, child: Text(browser.name),),
           Align(
             alignment: Alignment.bottomRight,
             child: Padding(
