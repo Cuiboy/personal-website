@@ -8,7 +8,7 @@ class WebFont {
         fontSize: size,
         color: color,
         fontFamily: 'SF',
-        fontWeight: FontWeight.w800);
+        fontWeight: (isWebMobile) ? FontWeight.w800 : FontWeight.w700);
   }
 
   static TextStyle medium({required double size, Color? color, double? height}) {

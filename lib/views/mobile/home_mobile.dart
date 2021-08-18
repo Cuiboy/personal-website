@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
-import 'dart:math' as math;
-import 'package:url_launcher/url_launcher.dart';
 import 'package:personal_website/helpers/web_icons.dart';
 import 'package:personal_website/helpers/global.dart';
 import 'package:personal_website/helpers/elements.dart';
@@ -19,30 +19,15 @@ class HomeMobile extends StatefulWidget {
 class _HomeMobileState extends State<HomeMobile>
     with SingleTickerProviderStateMixin {
   late AnimationController iconController;
-  ScrollController scrollController = ScrollController();
-  late ScrollController innerScrollController;
+  AutoScrollController scrollController = AutoScrollController();
   bool menuVisible = false;
   bool overlayVisible = false;
   bool menuItemsVisible = false;
   bool animateForward = true;
   bool buttonTapDown = false;
   bool showBackToTop = false;
+  bool showTab = true;
   double heightDelta = 0;
-
-  scrollTo(double height, {double? heightPercent}) {
-    double finalHeight = height;
-    double finalHeightPercent = heightPercent ?? 0.6;
-    if (height > 300 && heightRatio < widthRatio) {
-      finalHeight = finalHeightPercent * height * heightRatio +
-          (1.0 - finalHeightPercent) * height * widthRatio;
-    } else {
-      finalHeightPercent = 1.0;
-       finalHeight = height * math.pow(heightRatio, 0.5);
-    }
-    innerScrollController.animateTo(finalHeight,
-        duration: Duration(milliseconds: (250 + (height / 100).round())),
-        curve: Curves.easeOut);
-  }
 
   expandMenu() {
     setState(() {
@@ -84,7 +69,7 @@ class _HomeMobileState extends State<HomeMobile>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 60 * heightRatio),
+        SizedBox(height: 120 * heightRatio),
         FadeIn(
           50,
           true,
@@ -120,22 +105,22 @@ class _HomeMobileState extends State<HomeMobile>
               TextSpan(
                 text: "I'm a ",
                 style: WebFont.regular(
-                    size: 14 * widthRatio, color: WebColors.text),
+                    size: 14 * widthRatio, color: WebColors.text, height: 1.8),
               ),
               TextSpan(
                 text: "software engineer ",
                 style: WebFont.regular(
-                    size: 14 * widthRatio, color: WebColors.highlight),
+                    size: 14 * widthRatio, color: WebColors.highlight, height: 1.8),
               ),
               TextSpan(
                 text: "& ",
                 style: WebFont.regular(
-                    size: 14 * widthRatio, color: WebColors.text),
+                    size: 14 * widthRatio, color: WebColors.text, height: 1.8),
               ),
               TextSpan(
                 text: "UX Designer ",
                 style: WebFont.regular(
-                    size: 14 * widthRatio, color: WebColors.highlight),
+                    size: 14 * widthRatio, color: WebColors.highlight, height: 1.8),
               ),
               TextSpan(
                 text:
@@ -146,22 +131,22 @@ class _HomeMobileState extends State<HomeMobile>
               TextSpan(
                 text: "EECS ",
                 style: WebFont.regular(
-                    size: 14 * widthRatio, color: WebColors.highlight),
+                    size: 14 * widthRatio, color: WebColors.highlight, height: 1.8),
               ),
               TextSpan(
                 text: "at ",
                 style: WebFont.regular(
-                    size: 14 * widthRatio, color: WebColors.text),
+                    size: 14 * widthRatio, color: WebColors.text, height: 1.8),
               ),
               TextSpan(
                 text: "UC Berkeley",
                 style: WebFont.regular(
-                    size: 14 * widthRatio, color: WebColors.highlight),
+                    size: 14 * widthRatio, color: WebColors.highlight, height: 1.8),
               ),
               TextSpan(
                 text: ".",
                 style: WebFont.regular(
-                    size: 14 * widthRatio, color: WebColors.text),
+                    size: 14 * widthRatio, color: WebColors.text, height: 1.8),
               ),
             ])),
           ),
@@ -173,12 +158,11 @@ class _HomeMobileState extends State<HomeMobile>
           WebButton(
               text: "Explore",
               onPressed: () {
-                launch('https://patrickcui.com', forceSafariVC: false);
-                //scrollTo(600);
+                scrollController.scrollToIndex(1, preferPosition: AutoScrollPosition.begin);
               }),
         ),
         SizedBox(
-          height: 180 * heightRatio,
+          height: 100 * heightRatio,
         )
       ],
     );
@@ -239,8 +223,10 @@ class _HomeMobileState extends State<HomeMobile>
             Align(
                 alignment: Alignment.bottomLeft,
                 child: Padding(
-                  padding: EdgeInsets.all(14 * widthRatio),
+                  padding: EdgeInsets.all(18 * widthRatio),
                   child: IconButton(
+                      padding: EdgeInsets.all(8 * widthRatio),
+                      iconSize: 24 * widthRatio,
                       icon: Icon(
                         exp.altIcon ?? Icons.open_in_new,
                         color: WebColors.highlight,
@@ -259,6 +245,9 @@ class _HomeMobileState extends State<HomeMobile>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(
+          height: 80 * heightRatio,
+        ),
         Padding(
           padding: EdgeInsets.only(left: 8.0 * widthRatio),
           child: Text(
@@ -274,7 +263,7 @@ class _HomeMobileState extends State<HomeMobile>
         buildExpCard(Experience.bm),
         buildExpCard(Experience.decode),
         buildExpCard(Experience.freelance),
-        SizedBox(height: 60 * widthRatio),
+        SizedBox(height: 30 * widthRatio),
       ],
     );
   }
@@ -327,6 +316,7 @@ class _HomeMobileState extends State<HomeMobile>
                 SizedBox(height: 50 * widthRatio),
                 (proj.available)
                     ? IconButton(
+                        iconSize: 24 * widthRatio,
                         icon: Icon(
                           Icons.open_in_new,
                           color: WebColors.highlight,
@@ -347,7 +337,7 @@ class _HomeMobileState extends State<HomeMobile>
                         child: Center(
                             child: Text("Coming Soon",
                                 style: WebFont.regular(
-                                    size: 12, color: const Color(0xffF2994A)))),
+                                    size: 12 * widthRatio, color: const Color(0xffF2994A)))),
                       ),
               ],
             ),
@@ -359,6 +349,7 @@ class _HomeMobileState extends State<HomeMobile>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: 30 * widthRatio),
         Padding(
           padding: EdgeInsets.only(left: 8.0 * widthRatio),
           child: Text(
@@ -372,7 +363,7 @@ class _HomeMobileState extends State<HomeMobile>
         buildProjCard(Project.integral),
         buildProjCard(Project.broomstick),
         buildProjCard(Project.packmat),
-        SizedBox(height: 60 * widthRatio),
+        SizedBox(height: 30 * widthRatio),
       ],
     );
   }
@@ -423,6 +414,7 @@ class _HomeMobileState extends State<HomeMobile>
                   child: Padding(
                     padding: EdgeInsets.all(14 * widthRatio),
                     child: IconButton(
+                        iconSize: 24 * widthRatio,
                         icon: Icon(
                           WebIcons.instagram,
                           color: WebColors.text,
@@ -456,6 +448,7 @@ class _HomeMobileState extends State<HomeMobile>
               Padding(
                   padding: EdgeInsets.all(25 * widthRatio),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Hobby",
@@ -582,6 +575,7 @@ class _HomeMobileState extends State<HomeMobile>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: 30 * widthRatio),
         Padding(
           padding: EdgeInsets.only(left: 8.0 * widthRatio),
           child: Text(
@@ -633,15 +627,18 @@ class _HomeMobileState extends State<HomeMobile>
             ),
             IconButton(
               icon: Icon(WebIcons.facebook, color: WebColors.highlight),
-              onPressed: () => webLaunch("https://www.facebook.com/patrickk.cui"),
+              onPressed: () =>
+                  webLaunch("https://www.facebook.com/patrickk.cui"),
             ),
             IconButton(
               icon: Icon(WebIcons.instagram, color: WebColors.highlight),
-              onPressed: () => webLaunch("https://www.instagram.com/patrickk.cui/"),
+              onPressed: () =>
+                  webLaunch("https://www.instagram.com/patrickk.cui/"),
             ),
             IconButton(
               icon: Icon(WebIcons.linkedin, color: WebColors.highlight),
-              onPressed: () => webLaunch("https://www.linkedin.com/in/cuipatrick/"),
+              onPressed: () =>
+                  webLaunch("https://www.linkedin.com/in/cuipatrick/"),
             ),
             IconButton(
               icon: Icon(Icons.description, color: WebColors.highlight),
@@ -662,6 +659,31 @@ class _HomeMobileState extends State<HomeMobile>
     super.initState();
     iconController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 250));
+    scrollController.addListener(() {
+      if (scrollController.position.pixels > 100) {
+        if (showBackToTop == false) {
+          setState(() {
+            showBackToTop = true;
+          });
+        }
+      } else {
+        if (showBackToTop) {
+          setState(() {
+            showBackToTop = false;
+          });
+        }
+      }
+       if (scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        setState(() {
+          showTab = true;
+        });
+      } else {
+        setState(() {
+          showTab = false;
+        });
+      }
+    });
   }
 
   @override
@@ -672,76 +694,77 @@ class _HomeMobileState extends State<HomeMobile>
       backgroundColor: WebColors.background,
       body: Stack(
         children: [
-          NestedScrollView(
-            floatHeaderSlivers: true,
-            headerSliverBuilder: (context, innerBoxScrolled) => [
-              SliverAppBar(
-                backgroundColor: WebColors.background,
-                floating: true,
-                toolbarHeight: 80 * widthRatio,
-                actions: [
-                  Padding(
-                    padding: EdgeInsets.only(right: 10.0 * widthRatio),
-                    child: IconButton(
-                      icon: AnimatedIcon(
-                        icon: AnimatedIcons.menu_close,
-                        progress: iconController,
-                      ),
-                      onPressed: () =>
-                          menuVisible ? collapseMenu() : expandMenu(),
-                    ),
-                  )
-                ],
-                centerTitle: true,
-              )
-            ],
-            body: Builder(builder: (context) {
-              innerScrollController = PrimaryScrollController.of(context)!;
-              innerScrollController.addListener(() {
-                setState(() {
-                  heightDelta = innerScrollController.position.pixels;
-                });
-                if (innerScrollController.position.pixels > 100) {
-                  if (showBackToTop == false) {
-                    setState(() {
-                      showBackToTop = true;
-                    });
-                  }
-                } else {
-                  if (showBackToTop) {
-                    setState(() {
-                      showBackToTop = false;
-                    });
-                  }
-                }
-              });
-              return Scrollbar(
-                controller: innerScrollController,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: 20.0 * widthRatio, right: 20 * widthRatio),
-                  child: ListView.builder(
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        switch (index) {
-                          case 0:
-                            return buildHeader();
-                          case 1:
-                            return buildExp();
-                          case 2:
-                            return buildProj();
-                          case 3:
-                            return buildHobbies();
-                          case 4:
-                            return buildFooter();
-                          default:
-                            return Container();
-                        }
-                      }),
-                ),
-              );
-            }),
+          Center(
+            child: Scrollbar(
+              controller: scrollController,
+              child: Padding(
+                padding: EdgeInsets.only(
+                    left: 20.0 * widthRatio, right: 20 * widthRatio),
+                child: ListView.builder(
+                    itemCount: 5,
+                    controller: scrollController,
+                    itemBuilder: (context, index) {
+                      switch (index) {
+                        case 0:
+                          return AutoScrollTag(
+                              key: ValueKey(index),
+                              controller: scrollController,
+                              index: index,
+                              child: buildHeader());
+                        case 1:
+                          return AutoScrollTag(
+                              key: ValueKey(index),
+                              controller: scrollController,
+                              index: index,
+                              child: buildExp());
+                        case 2:
+                          return AutoScrollTag(
+                              key: ValueKey(index),
+                              controller: scrollController,
+                              index: index,
+                              child: buildProj());
+                        case 3:
+                          return AutoScrollTag(
+                              key: ValueKey(index),
+                              controller: scrollController,
+                              index: index,
+                              child: buildHobbies());
+                        case 4:
+                          return AutoScrollTag(
+                              key: ValueKey(index),
+                              controller: scrollController,
+                              index: index,
+                              child: buildFooter());
+                        default:
+                          return Container();
+                      }
+                    }),
+              ),
+            ),
           ),
+          AnimatedPositioned(
+              top: showTab ? 0 : -80 * widthRatio,
+              left: 0,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 80 * widthRatio,
+                color: WebColors.background,
+                child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 20.0 * widthRatio),
+                      child: IconButton(
+                        iconSize: 24 * widthRatio,
+                        icon: AnimatedIcon(
+                          icon: AnimatedIcons.menu_close,
+                          progress: iconController,
+                        ),
+                        onPressed: () =>
+                            menuVisible ? collapseMenu() : expandMenu(),
+                      ),
+                    )),
+              ),
+              duration: const Duration(milliseconds: 250)),
           Align(
             alignment: Alignment.bottomRight,
             child: Padding(
@@ -754,7 +777,7 @@ class _HomeMobileState extends State<HomeMobile>
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     fillColor: WebColors.highlight,
                     onPressed: () {
-                      innerScrollController.animateTo(-40.0,
+                      scrollController.animateTo(0.0,
                           curve: Curves.easeOut,
                           duration: Duration(
                               milliseconds: 300 + (heightDelta / 100).round()));
@@ -805,7 +828,7 @@ class _HomeMobileState extends State<HomeMobile>
                             collapseMenu();
                             Future.delayed(const Duration(milliseconds: 200))
                                 .then((_) {
-                              scrollTo(600);
+                              scrollController.scrollToIndex(1, preferPosition: AutoScrollPosition.begin);
                             });
                           },
                           child: Text(
@@ -814,6 +837,7 @@ class _HomeMobileState extends State<HomeMobile>
                                 size: 18 * widthRatio, color: WebColors.text),
                           )),
                     ),
+                    SizedBox(height: 12 * heightRatio,),
                     FadeIn(
                       100,
                       animateForward,
@@ -822,7 +846,7 @@ class _HomeMobileState extends State<HomeMobile>
                             collapseMenu();
                             Future.delayed(const Duration(milliseconds: 500))
                                 .then((_) {
-                              scrollTo(2800, heightPercent: 0.4);
+                              scrollController.scrollToIndex(2, preferPosition: AutoScrollPosition.begin);
                             });
                           },
                           child: Text(
@@ -831,6 +855,7 @@ class _HomeMobileState extends State<HomeMobile>
                                 size: 18 * widthRatio, color: WebColors.text),
                           )),
                     ),
+                    SizedBox(height: 12 * heightRatio,),
                     FadeIn(
                       200,
                       animateForward,
@@ -839,7 +864,7 @@ class _HomeMobileState extends State<HomeMobile>
                             collapseMenu();
                             Future.delayed(const Duration(milliseconds: 400))
                                 .then((_) {
-                              scrollTo(4350, heightPercent: 0.3);
+                              scrollController.scrollToIndex(3, preferPosition: AutoScrollPosition.begin);
                             });
                           },
                           child: Text(
@@ -854,9 +879,11 @@ class _HomeMobileState extends State<HomeMobile>
                         animateForward,
                         WebButton(
                             text: "Resume",
+                            textSize: 16 * widthRatio,
                             width: 155 * widthRatio,
                             height: 54 * widthRatio,
-                            onPressed: () => webLaunch("https://drive.google.com/file/d/1L40zBZc5E-IyETSuzS810Co9k0wyUbyn/view?usp=sharing")))
+                            onPressed: () => webLaunch(
+                                "https://drive.google.com/file/d/1L40zBZc5E-IyETSuzS810Co9k0wyUbyn/view?usp=sharing")))
                   ],
                 ),
               ),
