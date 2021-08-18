@@ -92,7 +92,7 @@ class _HomeMobileState extends State<HomeMobile>
                   size: 15 * widthRatio, color: WebColors.highlight)),
         ),
         FadeIn(200, true,
-            Text("Patrick Cui", style: WebFont.bold(size: 40 * widthRatio))),
+            Text("Patrick Cui.", style: WebFont.bold(size: 40 * widthRatio))),
         FadeIn(
           350,
           true,
@@ -643,7 +643,7 @@ class _HomeMobileState extends State<HomeMobile>
             ),
             IconButton(
               icon: Icon(Icons.description, color: WebColors.highlight),
-              onPressed: () => launch("https://drive.google.com/file/d/1L40zBZc5E-IyETSuzS810Co9k0wyUbyn/view?usp=sharing"),
+              onPressed: () => launch(resumeLink),
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 
 class WebFont {
@@ -10,12 +11,21 @@ class WebFont {
         fontWeight: FontWeight.w800);
   }
 
-  static TextStyle medium({required double size, Color? color}) {
+  static TextStyle medium({required double size, Color? color, double? height}) {
     return TextStyle(
         fontSize: size,
         color: color,
         fontFamily: 'SF',
+        height: height,
         fontWeight: FontWeight.w500);
+  }
+
+  static TextStyle semibold({required double size, Color? color}) {
+    return TextStyle(
+        fontSize: size,
+        color: color,
+        fontFamily: 'SF',
+        fontWeight: FontWeight.w600);
   }
 
   static TextStyle regular(
@@ -40,3 +50,5 @@ bool isWebMobile = false;
 launch(String url) {
   js.context.callMethod('open', [url]);
 }
+
+final String resumeLink = "https://drive.google.com/file/d/1L40zBZc5E-IyETSuzS810Co9k0wyUbyn/view?usp=sharing";

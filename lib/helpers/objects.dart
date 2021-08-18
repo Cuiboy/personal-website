@@ -9,6 +9,7 @@ class Experience {
   String desc;
   String url;
   IconData? altIcon;
+  String? stack;
 
   Experience({
     required this.tag,
@@ -47,6 +48,15 @@ class Experience {
       desc:
           "Berkeley Mobile is the official student-run mobile app of UC Berkeley with over 10,000 users. Our team maintains a campus resource and information aggregation platform, where we deliver resources required by students to navigate the campus and have an enriched Berkeley experience.",
       url: "https://apps.apple.com/us/app/berkeley-mobile/id912243518");
+  
+  static Experience bmDesktop = Experience(
+      tag: "Experience",
+      pos: "Associate Product Manager",
+      employer: "Berkeley Mobile",
+      start: "09.2020",
+      desc:
+          "Berkeley Mobile is the official student-run mobile app of UC Berkeley with over 10,000 users. Our team maintains a campus resource and information aggregation platform, where we deliver resources required by students to navigate the campus and have an enriched Berkeley experience.",
+      url: "https://apps.apple.com/us/app/berkeley-mobile/id912243518");
 
   static Experience decode = Experience(
       tag: "Leadership",
@@ -77,12 +87,14 @@ class Project {
   String imgPath;
   bool available;
   String? url;
+  String? stack;
 
   Project(
       {required this.name,
       required this.desc,
       required this.imgPath,
       required this.available,
+      this.stack,
       this.url});
 
   static Project integral = Project(
@@ -90,6 +102,7 @@ class Project {
       desc:
           "One-stop solution to campus information management platform for administrators. Digital backpack for students.",
       imgPath: "assets/images/integral-icon.png",
+      stack: "Dart  |  Flutter  |  Typescript  |  Firebase  |  GCP",
       url: "https://apps.apple.com/us/app/integral-digital-backpack/id1480096639",
       available: true);
   
@@ -98,6 +111,7 @@ class Project {
       desc:
           "Automatically detect and clean up bad photos in your camera roll so you always have space to take more.",
       imgPath: "assets/images/broomstick-icon.png",
+      stack: "Swift  |  TensorFlow  |  CoreML   |  Vision API",
       available: false);
   
   static Project packmat = Project(
@@ -105,6 +119,7 @@ class Project {
       desc:
           "A weight-sensitive solution to package theft. MIT LaunchX start-up, class of summer 2019.",
       imgPath: "assets/images/packmat-icon.png",
+      stack: "Swift  |  C  |  Arduino SDK",
       url: "https://launchx.com/blog/packmat-an-aesthetic-solution-to-package-theft/",
       available: true);
 

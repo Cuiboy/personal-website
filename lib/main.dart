@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:personal_website/helpers/global.dart';
 import 'package:personal_website/views/mobile/home_mobile.dart';
-import 'package:personal_website/views/desktop/home.dart';
+import 'package:personal_website/views/desktop/home_desktop.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,6 +44,6 @@ class _MainNavigationState extends State<MainNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    return (isWebMobile) ? const HomeMobile() : const Home();
+    return (isWebMobile || MediaQuery.of(context).size.width < 720) ? const HomeMobile() : const HomeDesktop();
   }
 }
