@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
+import 'dart:html' as html;
 import 'package:personal_website/helpers/web_icons.dart';
 import 'package:personal_website/helpers/global.dart';
 import 'package:personal_website/helpers/elements.dart';
@@ -781,6 +782,9 @@ class _HomeMobileState extends State<HomeMobile>
                           curve: Curves.easeOut,
                           duration: Duration(
                               milliseconds: 300 + (heightDelta / 100).round()));
+                      setState(() {
+                        showTab = true;
+                      });
                     },
                     shape: const CircleBorder(),
                     padding: EdgeInsets.all(12 * widthRatio),
