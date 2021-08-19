@@ -777,8 +777,8 @@ class _HomeMobileState extends State<HomeMobile>
                   child: RawMaterialButton(
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     fillColor: WebColors.highlight,
-                    onPressed: () {
-                      scrollController.animateTo(0.0,
+                    onPressed: () async {
+                      await scrollController.animateTo(0.0,
                           curve: Curves.easeOut,
                           duration: Duration(
                               milliseconds: 300 + (heightDelta / 100).round()));
