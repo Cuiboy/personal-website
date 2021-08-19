@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:personal_website/helpers/global.dart';
 import 'package:personal_website/views/mobile/home_mobile.dart';
 import 'package:personal_website/views/desktop/home_desktop.dart';
-import 'package:personal_website/views/mobile/webview_placeholder.dart';
 import 'package:platform_detect/platform_detect.dart';
 //import 'package:platform_detect/platform_detect.dart';
 
