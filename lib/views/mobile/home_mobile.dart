@@ -125,7 +125,7 @@ class _HomeMobileState extends State<HomeMobile>
               ),
               TextSpan(
                 text:
-                    " who spends his time building & designing exceptional digital experineces. Currenlty, I’m a student studying ",
+                    " who spends his time building & designing exceptional digital experineces. Currently, I’m a student studying ",
                 style: WebFont.regular(
                     size: 14 * widthRatio, color: WebColors.text, height: 1.8),
               ),

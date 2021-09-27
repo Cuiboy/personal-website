@@ -147,7 +147,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
               ),
               TextSpan(
                 text:
-                    " who spends his time building & designing exceptional digital experineces. Currenlty, I’m a student studying ",
+                    " who spends his time building & designing exceptional digital experineces. Currently, I’m a student studying ",
                 style: WebFont.regular(
                     size: 24 * widthRatio, color: WebColors.text, height: 1.8),
               ),
