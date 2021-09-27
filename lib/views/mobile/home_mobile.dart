@@ -363,6 +363,7 @@ class _HomeMobileState extends State<HomeMobile>
         ),
         buildProjCard(Project.integral),
         buildProjCard(Project.broomstick),
+        buildProjCard(Project.append),
         buildProjCard(Project.packmat),
         SizedBox(height: 30 * widthRatio),
       ],

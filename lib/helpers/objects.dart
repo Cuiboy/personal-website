@@ -97,6 +97,15 @@ class Project {
       this.stack,
       this.url});
 
+  static Project append = Project(
+      name: "Append",
+      desc:
+          "All cards, one place: turn any physical card or scannable codes into digital passes compatible with Apple Wallet.",
+      imgPath: "assets/images/append-icon.png",
+      stack: "Dart  |  Flutter  |  Vision  |  Core NFC",
+      url: "https://apps.apple.com/us/app/integral-digital-backpack/id1480096639",
+      available: true);
+
   static Project integral = Project(
       name: "Integral",
       desc:

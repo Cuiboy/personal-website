@@ -6,6 +6,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:personal_website/helpers/global.dart';
 import 'package:personal_website/helpers/objects.dart';
 import 'package:personal_website/helpers/elements.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeDesktop extends StatefulWidget {
   const HomeDesktop({Key? key}) : super(key: key);
@@ -20,6 +21,8 @@ class _HomeDesktopState extends State<HomeDesktop> {
   double heightDelta = 0;
   bool showBackToTop = false;
   bool showTab = false;
+
+  bool projExpanded = false;
 
   Widget buildTabs() {
     return Container(
@@ -278,26 +281,29 @@ class _HomeDesktopState extends State<HomeDesktop> {
           ),
         ),
         SizedBox(height: 60 * widthRatio),
-        Row(
-          children: [
-            Column(
-              children: [
-                buildExpCard(Experience.derivative, true),
-                SizedBox(height: 36 * widthRatio),
-                buildExpCard(Experience.bmDesktop, true),
-                SizedBox(height: 36 * widthRatio),
-                buildExpCard(Experience.freelance, true),
-              ],
-            ),
-            SizedBox(width: 36 * widthRatio),
-            Column(
-              children: [
-                buildExpCard(Experience.octo, false),
-                SizedBox(height: 36 * widthRatio),
-                buildExpCard(Experience.decode, false),
-              ],
-            )
-          ],
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              Column(
+                children: [
+                  buildExpCard(Experience.derivative, true),
+                  SizedBox(height: 36 * widthRatio),
+                  buildExpCard(Experience.bmDesktop, true),
+                  SizedBox(height: 36 * widthRatio),
+                  buildExpCard(Experience.freelance, true),
+                ],
+              ),
+              SizedBox(width: 36 * widthRatio),
+              Column(
+                children: [
+                  buildExpCard(Experience.octo, false),
+                  SizedBox(height: 36 * widthRatio),
+                  buildExpCard(Experience.decode, false),
+                ],
+              )
+            ],
+          ),
         ),
         SizedBox(height: 150 * widthRatio)
       ],
@@ -400,17 +406,47 @@ class _HomeDesktopState extends State<HomeDesktop> {
             style: WebFont.semibold(size: 48 * widthRatio),
           ),
         ),
-        SizedBox(height: 60 * widthRatio),
+        Column(
+          children: [
+            SizedBox(height: 60 * widthRatio),
         Row(
           children: [
             buildProjCard(Project.integral),
             SizedBox(width: 40 * widthRatio),
             buildProjCard(Project.broomstick),
             SizedBox(width: 40 * widthRatio),
-            buildProjCard(Project.packmat),
+            buildProjCard(Project.append),
           ],
         ),
+        (projExpanded) ?
+        Padding(
+          padding: EdgeInsets.only(top: 60.0 * widthRatio),
+          child: Row(
+            children: [
+              buildProjCard(Project.packmat),
+            ],
+          ),
+        ) : Container(),
+        SizedBox(height: 50 * widthRatio),
+        TextButton(onPressed: (){
+          setState(() {
+            projExpanded = !projExpanded;
+          });
+          if (!projExpanded) {
+             scrollController.scrollToIndex(2, preferPosition: AutoScrollPosition.begin);
+          }
+        }, 
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+          Text((projExpanded) ? "Collapse" : "Show More", style: WebFont.medium(size: 24 * widthRatio, color: WebColors.text),),
+          SizedBox(width: 6 * widthRatio),
+          Icon((projExpanded) ? Icons.arrow_upward : Icons.arrow_downward, color: WebColors.highlight)
+        ],)),
         SizedBox(height: 170 * widthRatio)
+          ],
+        )
+        
       ],
     );
   }
