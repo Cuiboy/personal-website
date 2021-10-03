@@ -103,7 +103,7 @@ class Project {
           "All cards, one place: turn any physical card or scannable codes into digital passes compatible with Apple Wallet.",
       imgPath: "assets/images/append-icon.png",
       stack: "Dart  |  Flutter  |  Vision  |  Core NFC",
-      url: "https://apps.apple.com/us/app/integral-digital-backpack/id1480096639",
+      url: "https://devpost.com/software/append-qfds4e",
       available: true);
 
   static Project integral = Project(
